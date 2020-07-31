@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+
+def getdatetime():
+    import datetime
+    return  datetime.datetime.now()
+# in this program you will see lots of \n don't confuse it's just for better user interface
+
+print("\t\t\t\t\t\t\t\t\t\t\tYOU ARE IN THE HEALTH MANAGEMENT DATABASE")
+# it shows the clients list if available
+with open("clients.txt","r+") as clients_name:
+    print("List of CLIENTS whose data is availabe in database -- \n" ,clients_name.read())
+
+# From here we added three input options for users.
+log_retreive_input = input("press \n1. for log \n2. for retreive-- \n")
+person_name_input = input("Please specify the name for whom you want to\n retreive or log--- \n")
+diet_exercise_input = input("Please input \n1.Diet or \n2.Exercise \nwhich one you want to retreive or log --- ")
+
+# It first read the file for client name if file exits in database and if file doesn't exit it write a new file and add the name in the file.
+with open("clients.txt","r") as client:
+    if person_name_input not in client.read():
+        with open("clients.txt","a") as clienta:
+            clienta.write(person_name_input + " \n")
+
+def file_writer():
+    '''
+    This function is for writing a new file if not available or updating the data if file already exist.
+    :return:
+    '''
+    try:
+        # here you can also convert 1 into string and then you don't have covert lock_retreive_input into integer..
+        if int(log_retreive_input) == 1:
+            data_write = input("Input data which you want write in the file... \n")
+            if int(diet_exercise_input) == 1:
+                with open(person_name_input+"_diet.txt","a") as f:
+                    f.write( "["  + str(getdatetime()) + "] : " + data_write + "\n" )
+                print("\nData Updated..")
+            elif int(diet_exercise_input) == 2:
+                with open(person_name_input+"_exercise.txt","a") as f:
+                    f.write( "["  + str(getdatetime()) + "] : " + data_write + "\n")
+                print("\nData Updated..")
+            print("\nIf you want to add more input Y if not input N")
+            yes = input("y or n >>> ")
+            while (yes == "y"):
+                file_writer()
+            else:
+                exit()
+    except Exception:
+        print("\nPlease input right values.")
+
+def file_reader():
+    '''
+    This function just read the file print the content on the screen if file exists in the database.
+    :return:
+    '''
+    try:
+        if int(log_retreive_input) == 2:
+            if int(diet_exercise_input) == 1:
+                with open(person_name_input+"_diet.txt","r") as reading:
+                    texts = reading.read()
+                    print(texts)
+            elif int(diet_exercise_input) == 2:
+                with open(person_name_input+"_exercise.txt","r") as reading:
+                    text = reading.read()
+                    print(text)
+            yes = input("\nIf you want to read again input Y or If not input N\n y or n>>> ")
+            while (yes == "y"):
+                file_reader()
+            else:
+                exit()
+    except Exception:
+        print("\nPlease input right values.")
+file_writer()
+file_reader()
