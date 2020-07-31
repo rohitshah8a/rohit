@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+import random
+lst = ["S","W","G"]
+your_score = 0
+villian_score = 0
+draw = 0
+incorrect = 0
+def game():
+    global villian_score,your_score,draw,incorrect
+    computer_choice = random.choice(lst)
+    user_choice = input("Enter your choice -- \n G for gun\n W for water \n S for snake >>> ").capitalize()
+    if user_choice == computer_choice:
+        draw += 1
+        print("NO ONE WIN.")
+    elif user_choice == "G" and computer_choice == "W":
+        villian_score += 1
+        print("You died \n \t\t Try next time.")
+    elif user_choice == "W" and computer_choice == "G":
+        your_score += 1
+        print("Villian Died.. congrates.")
+    elif user_choice == "S" and computer_choice == "G":
+        villian_score += 1
+        print("You died \n \t\t Try next time.")
+    elif user_choice == "G" and computer_choice == "S":
+        your_score += 1
+        print("Villian Died.. congrates")
+    elif user_choice == "S" and computer_choice == "W":
+        your_score += 1
+        print("Villian Died...congrates")
+    elif user_choice == "W" and computer_choice == "S":
+        villian_score += 1
+        print("You died \n \t\t Try next time.")
+    else:
+        incorrect += 1
+        print("Incorrect Keyword found..")
+chances = 0
+while (chances<10):
+    print("Total chances left " + str(10 - chances))
+    game()
+    chances += 1
+print(f"\nGAME OVER ... \n\nYour total score = {your_score} \nVillian total score = {villian_score} \nGame draw = {draw} \nIncorrect input = {incorrect}")
+if your_score>villian_score:
+    print("You WIN..")
+elif your_score<villian_score:
+    print("\nYou LOOSE..")
+else:
+    print("GAME DRAW..")
