@@ -10,7 +10,8 @@
 class Library:
     global books_list
     books_list = ["IRON MAN", "CAPTAIN MARVEL", "SPIDER MAN", "KRISH"]
-
+    """ I added this __init__ for my convinient for initial tests but you can costomize it as you need
+    or you can ask me if you have any idea in mind """
     # def __init__(self,add_book_name,lend_book_name,return_book_name):
     #     self.add_book_name = add_book_name
     #     self.lend_book_name = lend_book_name
@@ -48,7 +49,8 @@ def user_options():
         while True:
             print("-------------------------------------------------------------------------------------------------------------------------------------------")
             print("-----------------------------------------------------<< YOU ARE IN THE LIBRARY >>----------------------------------------------------------")
-            print("-------------------------------------------------------------------------------------------------------------------------------------------\n Choose Options below ::")
+            print("-------------------------------------------------------------------------------------------------------------------------------------------
+                  \n Choose Options below ::")
             print("\n1. Display available Book\n2. Lend Book \n3. Add Book \n4. Return Book \n5. Exit the program")
             user_input = input("Please input the number u want :")
             if user_input == "1":
