@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+
+'''# This program is made in such a way that it will work properly until you exit,
+ if you exit this program everything will be resset and you will loose your data.
+ If you want to store your data in a file, you can contact me I can write another program for that.'''
+
+''' This class is just the template of library .
+ In this class we have options of display_book,lend_book,add_book and return_book and 
+ except display_book each one takes one argument which is book name.'''
+class Library:
+    global books_list
+    books_list = ["IRON MAN", "CAPTAIN MARVEL", "SPIDER MAN", "KRISH"]
+    """ I added this __init__ for my convinient for initial tests but you can costomize it as you need
+    or you can ask me if you have any idea in mind """
+    # def __init__(self,add_book_name,lend_book_name,return_book_name):
+    #     self.add_book_name = add_book_name
+    #     self.lend_book_name = lend_book_name
+    #     self.return_book_name = return_book_name
+
+    def display_book(self):
+        """It display the available books in the library and it doesn't take any argument"""
+        print("List of books available is: ")
+        for book in books_list :
+            print("- ",book)
+
+    def lend_book(self,lend_book_name):
+        self.lend_book_name = lend_book_name
+        print("You lend the book ","\n -",self.lend_book_name)
+        books_list.remove(self.lend_book_name)
+        return Library.display_book(self=0)
+
+    def add_book(self,add_book_name):
+        self.add_book_name = add_book_name
+        print("Adding book to the library","\n - ", self.add_book_name)
+        books_list.append(self.add_book_name)
+        print("Book added to the library.")
+        return Library.display_book(self=0)
+
+    def return_book(self,return_book_name):
+        self.return_book_name = return_book_name
+        books_list.append(self.return_book_name)
+        print(f"You have returned the book {return_book_name} Thanks.")
+        return Library.display_book(self=0)
+
+# From here We have written User Interface Options
+def user_options():
+    try:
+        print("------------------------------------------------------------<< WELCOME >>------------------------------------------------------------------")
+        while True:
+            print("-------------------------------------------------------------------------------------------------------------------------------------------")
+            print("-----------------------------------------------------<< YOU ARE IN THE LIBRARY >>----------------------------------------------------------")
+            print("-------------------------------------------------------------------------------------------------------------------------------------------
+                  \n Choose Options below ::")
+            print("\n1. Display available Book\n2. Lend Book \n3. Add Book \n4. Return Book \n5. Exit the program")
+            user_input = input("Please input the number u want :")
+            if user_input == "1":
+                Library.display_book(self=0)
+            elif user_input == "2":
+                Library.display_book(self=0)
+                bookname = input("Book name you want to lend: ").upper()
+                Library().lend_book(str(bookname))
+                while True:
+                    lendbookname2 = input("Y if you want to lend another book and N if not.").upper()
+                    if lendbookname2 == "Y":
+                        bookname = input("Book name you want to lend: ").upper()
+                        Library().lend_book(str(bookname))
+                    else:
+                        user_options()
+            elif user_input == "3":
+                addbook = input("Book name you want to add : ").upper()
+                Library().add_book(addbook)
+                while True:
+                    addbookname = input("Y if you want to add another book and N if not.").upper()
+                    if addbookname == "Y":
+                        addbook = input("Book name you want to add : ").upper()
+                        Library().add_book(addbook)
+                    else:
+                        user_options()
+
+            elif user_input == "4":
+                returnbook = input("Book name you want to return : ").upper()
+                Library().return_book(returnbook)
+                while True:
+                    returnbookname = input("Y if you want to return another book and N if not.").upper()
+                    if returnbookname == "Y":
+                        returnbook = input("Book name you want to return : ").upper()
+                        Library().return_book(returnbook)
+                    else:
+                        user_options()
+
+            elif user_input == "5":
+                print("\nThank You ..EXITTING NOW")
+                exit()
+    except Exception:
+        print("Please input right values..")
+        user_options()
+user_options()
